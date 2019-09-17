@@ -36,18 +36,19 @@
       <HintPath>..\..\..\..\KSP DLL\1.3.1\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="ROLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ROLibrary\GameData\ROLib\Plugins\ROLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Core">
+    <Reference Include="TexturesUnlimited, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\KSP DLL\1.6.1\TexturesUnlimited.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\KSP DLL\1.3.1\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -58,21 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimState.cs" />
-    <Compile Include="AnimationModule.cs" />
-    <Compile Include="ROEModelConstraint.cs" />
-    <None Include="ModelData.cs.disabled" />
-    <None Include="ModelModule.cs.disabled" />
-    <Compile Include="ROELog.cs" />
-    <Compile Include="ROEExtensions.cs" />
-    <Compile Include="ROEUtil.cs" />
+    <Compile Include="Modules\ROEGimbalOffsetModule.cs" />
+    <None Include="ROEModularSolidRocket.cs.disabled" />
     <None Include="ROEEngineStatDisplay.cs.disabled" />
     <None Include="ROEEngineThrustCurveGUI.cs.disabled" />
-    <None Include="ROEAnimateEngineHeat.cs.disabled" />
-    <Compile Include="ROEDeployableEngine.cs" />
-    <Compile Include="ROEStockInterop.cs" />
+    <Compile Include="Modules\ROEDeployableEngine.cs" />
     <None Include="ThrustCurveEditorGUI - Original.cs.disabled" />
-    <None Include="ROEProcSRB.cs.disabled" />
+    <Compile Include="Modules\ROEModularSRB.cs" />
     <None Include="ThrustCurveEditorGUI.cs.disabled" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
+using ROLib;
 //using RealFuels;
 
 namespace ROEngines
@@ -20,14 +18,14 @@ namespace ROEngines
         public string engineID = "Engine";
 
         [KSPField(isPersistant = true)]
-        public String persistentState = AnimState.STOPPED_START.ToString();
+        public String persistentState = ROLAnimState.STOPPED_START.ToString();
 
         [Persistent]
         public string configNodeData = string.Empty;
 
         private bool initialized = false;
                 
-        private AnimationModule animationModule;
+        private ROLAnimationModule animationModule;
 
         private ModuleEnginesFX engineModule;
         
@@ -84,9 +82,9 @@ namespace ROEngines
             setupEngineModuleGui();
         }
 
-        public void onAnimationStateChange(AnimState newState)
+        public void onAnimationStateChange(ROLAnimState newState)
         {
-            if (newState == AnimState.STOPPED_END && HighLogic.LoadedSceneIsFlight)
+            if (newState == ROLAnimState.STOPPED_END && HighLogic.LoadedSceneIsFlight)
             {
                 engineModule.Activate();
             }
@@ -94,7 +92,7 @@ namespace ROEngines
         
         public override void OnActive()
         {
-            if (animationModule.animState == AnimState.STOPPED_END)
+            if (animationModule.animState == ROLAnimState.STOPPED_END)
             {
                 engineModule.Activate();
             }
@@ -132,11 +130,11 @@ namespace ROEngines
         {
             if (initialized) { return; }
             initialized = true;
-            ConfigNode node = ROEUtil.parseConfigNode(configNodeData);
+            ConfigNode node = ROLConfigNodeUtils.parseConfigNode(configNodeData);
             AnimationData animData = new AnimationData(node.GetNode("ANIMATIONDATA"));
-            animationModule = new AnimationModule(part, this, nameof(persistentState), null, nameof(deployEngineEvent), nameof(retractEngineEvent));
+            animationModule = new ROLAnimationModule(part, this, nameof(persistentState), null, nameof(deployEngineEvent), nameof(retractEngineEvent));
             animationModule.getSymmetryModule = m => ((ROEDeployableEngine)m).animationModule;
-            animationModule.setupAnimations(animData, part.transform.FindRecursive("model"), 0);
+            animationModule.setupAnimations(animData, part.transform.ROLFindRecursive("model"), 0);
             animationModule.onAnimStateChangeCallback = onAnimationStateChange;
         }
 
